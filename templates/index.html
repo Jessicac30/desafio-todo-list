@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="msapplication-TileColor" content="#2d89ef" />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <title>Todo List</title>
   </head>
   <body>
@@ -36,7 +36,7 @@
             </div>
             <div class="img">
               <div class="backdrop"></div>
-              <img src="../static/images/perfil.png" alt="" />
+              <img src="{{ url_for('static', filename='images/perfil.png') }}" alt="Perfil" />
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
           <div class="categories">
             <div class="category">
               <div class="left">
-                <img src="../static/images/boy.png" alt="sun" />
+                <img src="{{ url_for('static', filename='images/boy.png') }}" alt="Boy" />
                 <div class="content">
                   <h1>Personal</h1>
                   <p>Tarefas</p>
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="category-details">
-          <img src="../static/images/boy.png" alt="" id="category-img" />
+          <img src="{{ url_for('static', filename='images/boy.png') }}" alt="Boy" id="category-img" />
           <div class="details">
             <p id="num-tasks">8 Tarefas</p>
             <h1 id="category-title">Personal</h1>
@@ -191,7 +191,6 @@
         </div>
       </div>
     </div>
-
-    <script src="../static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>

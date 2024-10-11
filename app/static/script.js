@@ -1,37 +1,13 @@
 
 let categories = [
-  {
-    title: "Personal",
-    img: "boy.png",
-  },
-  {
-    title: "Work",
-    img: "briefcase.png",
-  },
-  {
-    title: "Shopping",
-    img: "shopping.png",
-  },
-  {
-    title: "Coding",
-    img: "web-design.png",
-  },
-  {
-    title: "Health",
-    img: "healthcare.png",
-  },
-  {
-    title: "Fitness",
-    img: "dumbbell.png",
-  },
-  {
-    title: "Education",
-    img: "education.png",
-  },
-  {
-    title: "Finance",
-    img: "saving.png",
-  },
+  { title: "Personal", img: "boy.png" },
+  { title: "Work", img: "briefcase.png" },
+  { title: "Shopping", img: "shopping.png" },
+  { title: "Coding", img: "web-design.png" },
+  { title: "Health", img: "healthcare.png" },
+  { title: "Fitness", img: "dumbbell.png" },
+  { title: "Education", img: "education.png" },
+  { title: "Finance", img: "saving.png" },
 ];
 
 let tasks = [
