@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="screen-backdrop"></div>
+        <div class="login-screen screen">
+            <div class="head-wrapper">
+                <div class="welcome">
+                    <h1>Bem-vindo de volta!</h1>
+                    <p>Por favor, faça login para continuar.</p>
+                </div>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="login-input" required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" class="login-input" required />
+                </div>
+                <div class="btns">
+                    <button type="submit" class="login-btn">Entrar</button>
+                </div>
+                <p id="error-msg" style="color:red;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/login.js"></script>
+</body>
+</html>

@@ -327,6 +327,7 @@ body {
     text-align: center;
     font-size: 1.5rem;
     opacity: 0.6;
+    color: #fff;
 }
 
 /* Add Task */
@@ -429,6 +430,10 @@ button.add-btn {
     background-color: #39f74d;
 }
 
+button.add-btn:hover {
+    background-color: #0a7c15;
+}
+
 .add-task-backdrop {
     position: absolute;
     bottom: 0;
@@ -456,4 +461,45 @@ button.add-btn {
 .black-backdrop.active {
     opacity: 1;
     visibility: visible;
+}
+
+/* Styles for the login page inputs */
+.login-form {
+    width: 100%;
+    padding: 0 30px;
+    display: flex; 
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.login-input {
+    width: calc(100% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #2e2e46;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.login-input:focus {
+    border-color: #39f74d;
+    outline: none; 
+}
+
+.login-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #39f74d;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+.login-btn:hover {
+    background-color: #32c84d;
 }
