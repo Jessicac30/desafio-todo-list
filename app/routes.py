@@ -18,7 +18,7 @@ def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
     if user and user.check_password(data['password']):
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=user.email)
         return jsonify(access_token=access_token), 200
     return jsonify({'error': 'Invalid credentials'}), 401
 
@@ -66,7 +66,11 @@ def update_task(task_id):
         task.completed = data['completed']
     
     db.session.commit()
-    return jsonify({'message': 'Task updated successfully'})
+    return jsonify({
+        'message': 'Task updated successfully',
+        'id': task.id,
+        'completed': task.completed
+    })
 
 @main_bp.route('/api/tasks/<int:task_id>', methods=['DELETE'])
 @jwt_required()
@@ -119,5 +123,6 @@ def tasks_by_category(category_id):
     return jsonify([{
         'id': task.id,
         'title': task.title,
-        'completed': task.completed
+        'completed': task.completed,
+        'category_id': task.category_id
     } for task in tasks])

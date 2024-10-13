@@ -56,25 +56,10 @@ const renderCategories = () => {
   categories.forEach((category) => {
     const div = document.createElement("div");
     div.classList.add("category");
-
+    
     div.addEventListener("click", () => {
       selectedCategory = category;
-
-      fetch(`/api/categories/${category.id}/tasks`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-        }
-      })
-      .then(response => response.json())
-      .then(tasksData => {
-        tasks = tasksData;
-        categoryTitle.innerHTML = category.title;
-        categoryImg.src = `../static/images/${category.img}`;
-        renderTasks();
-        updateTotals();
-      })
-      .catch(error => console.error('Error fetching tasks:', error));
+      fetchCategoryTasks(category);
     });
 
     div.innerHTML = `
@@ -96,6 +81,25 @@ const renderCategories = () => {
 
     categoriesContainer.appendChild(div);
   });
+};
+
+const fetchCategoryTasks = (category) => {
+  fetch(`/api/categories/${category.id}/tasks`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    }
+  })
+  .then(response => response.json())
+  .then(tasksData => {
+    tasks = tasksData;
+    categoryTitle.innerHTML = category.title;
+    categoryImg.src = `../static/images/${category.img}`;
+    renderTasks();
+    updateTotals();
+    toggleScreen();
+  })
+  .catch(error => console.error('Error fetching tasks:', error));
 };
 
 const renderTasks = () => {
@@ -128,6 +132,7 @@ const renderTasks = () => {
           </svg>
         </div>
       `;
+
       label.innerHTML = `
         <span class="checkmark">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -162,7 +167,7 @@ const addTask = (e) => {
   const category = categorySelect.value;
 
   if (taskTitle === "") {
-    alert("Please enter a task");
+    alert("Por favor, insira uma tarefa");
   } else {
     const newTask = {
       title: taskTitle,
