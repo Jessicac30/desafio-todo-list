@@ -19,9 +19,10 @@ const toggleScreen = () => {
 
 const updateTotals = () => {
   const categoryTasks = tasks.filter(
-    (task) => task.category_id === selectedCategory.id
+    (task) => task.category_id === selectedCategory?.id
   );
-  numTasks.innerHTML = `${categoryTasks.length} Tarefas`;
+
+  numTasks.innerHTML = `${categoryTasks.length || 0} Tarefas`;
   totalTasks.innerHTML = tasks.length;
 };
 
@@ -35,10 +36,26 @@ const loadCategories = () => {
   .then(response => response.json())
   .then(data => {
     categories = data;
-    renderCategories();
+    loadTasks();
     populateCategorySelect();
   })
   .catch(error => console.error('Error loading categories:', error));
+};
+
+const loadTasks = () => {
+  fetch('/api/tasks', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    }
+  })
+  .then(response => response.json())
+  .then(tasksData => {
+    tasks = tasksData;
+    renderCategories();
+    totalTasks.innerHTML = tasks.length;
+  })
+  .catch(error => console.error('Error loading tasks:', error));
 };
 
 const populateCategorySelect = () => {
@@ -54,9 +71,11 @@ const populateCategorySelect = () => {
 const renderCategories = () => {
   categoriesContainer.innerHTML = '';
   categories.forEach((category) => {
+    const categoryTaskCount = tasks.filter(task => task.category_id === category.id).length;
+
     const div = document.createElement("div");
     div.classList.add("category");
-    
+
     div.addEventListener("click", () => {
       selectedCategory = category;
       fetchCategoryTasks(category);
@@ -67,7 +86,7 @@ const renderCategories = () => {
         <img src="../static/images/${category.img}" alt="${category.title}" />
         <div class="content">
           <h1>${category.title}</h1>
-          <p>${0} Tasks</p> <!-- Inicialmente 0, vai ser atualizado depois -->
+          <p>${categoryTaskCount || 0} Tarefas</p>
         </div>
       </div>
       <div class="options">
@@ -193,6 +212,9 @@ const createTask = (task) => {
     saveLocal();
     toggleAddTaskForm();
     renderTasks();
+    updateTotals();
+    populateCategorySelect();
+    loadTasks(); 
   })
   .catch(error => console.error('Error:', error));
 };
@@ -212,6 +234,8 @@ const updateTaskStatus = (taskId, completed) => {
     tasks[index].completed = completed;
     saveLocal();
     renderTasks();
+    updateTotals();
+    loadTasks(); 
   })
   .catch(error => console.error('Error:', error));
 };
@@ -228,6 +252,8 @@ const deleteTask = (taskId) => {
     tasks.splice(index, 1);
     saveLocal();
     renderTasks();
+    updateTotals();
+    loadTasks(); 
   })
   .catch(error => console.error('Error:', error));
 };
@@ -255,6 +281,7 @@ addTaskBtn.addEventListener("click", toggleAddTaskForm);
 blackBackdrop.addEventListener("click", toggleAddTaskForm);
 addBtn.addEventListener("click", addTask);
 cancelBtn.addEventListener("click", toggleAddTaskForm);
+
 
 getLocal();
 loadCategories();
