@@ -26,6 +26,21 @@ const updateTotals = () => {
   totalTasks.innerHTML = tasks.length;
 };
 
+const redirectToLogin = () => {
+  window.location.href = '/login.html';
+};
+
+
+const checkAuthentication = (response) => {
+  if (response.status === 401) {
+    localStorage.removeItem('access_token');
+    redirectToLogin();
+    throw new Error('Token inválido ou expirado');
+  }
+  return response;
+};
+
+
 const loadCategories = () => {
   fetch('/api/categories', {
     method: 'GET',
@@ -33,6 +48,7 @@ const loadCategories = () => {
       'Authorization': `Bearer ${localStorage.getItem('access_token')}`
     }
   })
+  .then(checkAuthentication)
   .then(response => response.json())
   .then(data => {
     categories = data;
@@ -49,6 +65,7 @@ const loadTasks = () => {
       'Authorization': `Bearer ${localStorage.getItem('access_token')}`
     }
   })
+  .then(checkAuthentication)
   .then(response => response.json())
   .then(tasksData => {
     tasks = tasksData;
@@ -109,6 +126,7 @@ const fetchCategoryTasks = (category) => {
       'Authorization': `Bearer ${localStorage.getItem('access_token')}`
     }
   })
+  .then(checkAuthentication)
   .then(response => response.json())
   .then(tasksData => {
     tasks = tasksData;
@@ -206,6 +224,7 @@ const createTask = (task) => {
     },
     body: JSON.stringify(task),
   })
+  .then(checkAuthentication)
   .then(response => response.json())
   .then(data => {
     tasks.push(data);
@@ -228,6 +247,7 @@ const updateTaskStatus = (taskId, completed) => {
     },
     body: JSON.stringify({ completed }),
   })
+  .then(checkAuthentication)
   .then(response => response.json())
   .then(data => {
     const index = tasks.findIndex(t => t.id === taskId);
