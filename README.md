@@ -20,3 +20,15 @@ git clone https://github.com/Jessicac30/desafio-todo-list.git
 docker-compose up -d  
 ```
 - Abra no navegador: http://127.0.0.1:5000
+
+## Login 
+``` ruby
+Email: jess@gmail.com
+Senha: 123
+```
+
+# Popular Banco 
+- Na pasta `raiz` execute:
+``` ruby
+python init_db.py
+```
