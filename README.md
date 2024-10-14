@@ -5,6 +5,11 @@ end, banco de dados, e funcionalidades de segurança. O objetivo é avaliar a
 capacidade técnica em Python, assim como habilidades com tecnologias
 complementares.
 
+# Link de execução na AWS EC2
+```ruby
+https://18.118.86.20/
+```
+
 # Dependências
 Instalar o Docker - [docker-desktop](https://www.docker.com/products/docker-desktop/)
 
@@ -26,7 +31,7 @@ docker-compose up -d
 Email: jess@gmail.com
 Senha: 123
 ```
-![Gravando-2024-10-14-004632](https://github.com/user-attachments/assets/2fd04231-e042-44aa-a277-91926f614d43)
+![todo](https://github.com/user-attachments/assets/d8fafc9e-59e2-48ec-9b51-2478f62ceee2)
 
 # Popular Banco 
 - Na pasta `raiz` execute:
