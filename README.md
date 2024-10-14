@@ -26,6 +26,7 @@ docker-compose up -d
 Email: jess@gmail.com
 Senha: 123
 ```
+![Gravando-2024-10-14-004632](https://github.com/user-attachments/assets/2fd04231-e042-44aa-a277-91926f614d43)
 
 # Popular Banco 
 - Na pasta `raiz` execute:
