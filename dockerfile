@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -7,6 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ENV FLASK_APP=app
+
 EXPOSE 5000
 
-CMD ["flask", "run", "--host=18.118.86.20", "--reload"]
+CMD ["flask", "run", "--host=0.0.0.0", "--reload"]
