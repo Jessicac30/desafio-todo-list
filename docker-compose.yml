@@ -8,5 +8,6 @@ services:
       - .:/app
     environment:
       FLASK_ENV: development
+      DATABASE_URL: sqlite:///tasks.db
   redis:
     image: "redis:alpine"
